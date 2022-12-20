@@ -31,3 +31,22 @@ st.title("**Petroleum Engineering Planning**")
 
 st.write("---")
 
+# Add information of the app
+st.markdown(
+    """ This app is used to plan all the activities related to the petroleum engineering program at ESPOL.
+
+**Python Libraries:** streamlit, pandas, matplotlib
+"""
+)
+
+# Add additional information
+expander = st.expander("About")
+expander.write("This app is useful for planning")
+
+# Insert image
+image = Image.open("Resources/platform.jpg")
+st.image(image, width=100, use_column_width=True)
+
+# Sidebar
+Logo = Image.open("Resources/ESPOL.png")
+st.sidebar.image(Logo)
