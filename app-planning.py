@@ -50,3 +50,34 @@ st.image(image, width=100, use_column_width=True)
 # Sidebar
 Logo = Image.open("Resources/ESPOL.png")
 st.sidebar.image(Logo)
+
+# Add title to the sidebar section
+st.sidebar.title(":arrow_down: **Navigation**")
+
+# Upload files
+upload_file = st.sidebar.file_uploader("Upload your file" )
+
+# Pages
+with st.sidebar:
+    options = option_menu(
+        menu_title="Menu",
+        options=["Home", "Data", "Plots"],
+        icons=["house", "tv-fill", "box"],
+    )
+
+
+# Useful functions
+def data(df):
+    st.subheader("**Dataframe Header**")
+    st.write(df.head())
+    st.subheader("**Data Summary**")
+    st.write(df.describe())
+
+
+# Call dataframe
+if upload_file:
+    df = pd.read_csv(upload_file, encoding='latin-1')
+
+# Call options of web app
+if options == "Data":
+    data(df)
