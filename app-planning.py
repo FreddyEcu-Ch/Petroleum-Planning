@@ -77,6 +77,7 @@ def gender(df):
     st.plotly_chart(fig)
     st.subheader("**Summary**")
     g = [n for n in df.iloc[:, -1].value_counts()]
+    g.reverse()
     st.write(f"Currently, there are **{g[0]} male and {g[1]} female students** enrolled in petroleum engineering.")
     st.subheader("**Statistical Summary**")
     fig_2 = px.pie(df, values=g, names=df.iloc[:, -1].unique())
