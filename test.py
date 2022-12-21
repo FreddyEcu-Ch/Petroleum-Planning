@@ -23,3 +23,12 @@ plt.show()
 #%%
 fig_1 = px.histogram(df, x=df.iloc[:, -1], labels={"x": "Gender"}, color=df.iloc[:, -1])
 fig_1.show()
+
+#%%
+df_est = pd.read_csv("Data/Estado de estudiantes.csv")
+# Rename column names
+df_est.rename(columns={"MATR�CULA": "MATRÍCULA", "G�nero": "GÉNERO"}, inplace=True)
+#%%
+df_est.to_csv("Data/Estado Estudiantes.csv")
+
+
