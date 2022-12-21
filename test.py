@@ -1,6 +1,7 @@
 #%%
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly_express as px
 
 #%%
 df = pd.read_excel("Data/Estado de estudiantes.xlsx")
@@ -18,3 +19,7 @@ ax.set_title("Students per Gender", fontsize=18, fontweight="bold")
 plt.bar_label(bars)
 plt.tight_layout()
 plt.show()
+
+#%%
+fig_1 = px.histogram(df, x=df.iloc[:, -1], labels={"x": "Gender"}, color=df.iloc[:, -1])
+fig_1.show()
