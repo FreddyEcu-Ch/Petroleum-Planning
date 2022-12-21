@@ -29,6 +29,6 @@ df_est = pd.read_csv("Data/Estado de estudiantes.csv")
 # Rename column names
 df_est.rename(columns={"MATR�CULA": "MATRÍCULA", "G�nero": "GÉNERO"}, inplace=True)
 #%%
-df_est.to_csv("Data/Estado Estudiantes.csv")
+df_est.to_csv("Data/Estado Estudiantes.csv", index=False)
 
 
