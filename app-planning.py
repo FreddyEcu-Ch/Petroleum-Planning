@@ -68,8 +68,7 @@ with st.sidebar:
 
 # Useful functions
 def data(df):
-    st.subheader("**Dataframe Header**")
-    st.write(df.head())
+    st.dataframe(df)
     st.subheader("**Data Summary**")
     st.write(df.describe())
 
