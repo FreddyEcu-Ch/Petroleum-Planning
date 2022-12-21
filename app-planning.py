@@ -2,6 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import plotly_express as px
 import streamlit as st
 from streamlit_option_menu import option_menu
 from PIL import Image
@@ -74,17 +75,11 @@ def data(df):
 
 
 def gender(df):
-    fig, ax = plt.subplots(figsize=(10, 8))
-    ax.hist(x=df.iloc[:, -1])
-    ax.set_xlabel("Gender", fontsize=16)
-    ax.set_ylabel("Amount", fontsize=16)
-    ax.tick_params(axis='x', labelsize=14)
-    ax.tick_params(axis='y', labelsize=14)
-    ax.set_title("Students per Gender", fontsize=18, fontweight="bold")
-    st.pyplot(fig)
+    fig = px.histogram(df, x=df.iloc[:, -1], labels={"x": "Gender"}, color=df.iloc[:, -1])
+    st.plotly_chart(fig)
     st.subheader("**Summary**")
     g = [n for n in df.iloc[:, -1].value_counts()]
-    st.success(f"Currently, there are {g[0]} men and {g[1]} women")
+    st.write(f"Currently, there are **{g[0]} male and {g[1]} female students** enrolled in petroleum engineering.")
 
 
 # Call dataframe
