@@ -73,6 +73,20 @@ def data(df):
     st.write(df.describe())
 
 
+def gender(df):
+    fig, ax = plt.subplots(figsize=(10, 8))
+    ax.hist(x=df.iloc[:, -1])
+    ax.set_xlabel("Gender", fontsize=16)
+    ax.set_ylabel("Amount", fontsize=16)
+    ax.tick_params(axis='x', labelsize=14)
+    ax.tick_params(axis='y', labelsize=14)
+    ax.set_title("Students per Gender", fontsize=18, fontweight="bold")
+    st.pyplot(fig)
+    st.subheader("**Summary**")
+    g = [n for n in df.iloc[:, -1].value_counts()]
+    st.success(f"Currently, there are {g[0]} men and {g[1]} women")
+
+
 # Call dataframe
 if upload_file:
     df = pd.read_csv(upload_file, encoding='latin-1')
@@ -80,3 +94,8 @@ if upload_file:
 # Call options of web app
 if options == "Data":
     data(df)
+
+elif options == "Plots":
+    if st.checkbox("Gender"):
+        st.subheader("**Students per Gender**")
+        gender(df)
