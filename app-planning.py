@@ -1,4 +1,5 @@
 # import Python Libraries
+import numpy as np
 import pandas as pd
 import plotly_express as px
 import streamlit as st
@@ -113,6 +114,16 @@ def average(df):
     st.success(f" **Min grade**: {min_g}")
 
 
+def students(df):
+    st.subheader("**Students Information**")
+    est = st.selectbox("Select a student", options=df.iloc[:, 2])
+    st.subheader("**Show Information**")
+    df_est = df.loc[df.iloc[:, 2] == est]
+    features = np.array(["ID", "Name", "Grade", "% Avance", "Credits to take", "Gender"])
+    ind = np.array([1, 2, 3, 4, 5, 7])
+    infor = [st.write(f"{col}: {df_est.iloc[:, index].values[0]}") for index, col in zip(ind, features)]
+
+
 # Call dataframe
 if upload_file:
     df = pd.read_csv(upload_file, encoding="latin-1")
@@ -128,3 +139,6 @@ elif options == "Plots":
 
     elif st.checkbox("Academic Performance"):
         average(df)
+
+    elif st.checkbox("Students Information"):
+        students(df)
