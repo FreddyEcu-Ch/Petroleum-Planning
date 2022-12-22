@@ -31,4 +31,9 @@ df_est.rename(columns={"MATR�CULA": "MATRÍCULA", "G�nero": "GÉNERO"}, inpl
 #%%
 df_est.to_csv("Data/Estado Estudiantes.csv", index=False)
 
+#%%
+fig_2, ax = plt.subplots(figsize=(10, 8))
+ax.hist(df.iloc[:, 3], bins=30)
+plt.show()
+
 

@@ -84,6 +84,19 @@ def gender(df):
     st.plotly_chart(fig_2)
 
 
+def average(df):
+    fig = px.bar(df, x= df.iloc[:, 3], y=df.iloc[:, 2], labels={"x": "Academic Performance", "y": "student"})
+    st.plotly_chart(fig)
+    st.subheader("**Summary**")
+    col1, col2, col3 = st.columns(3)
+    df_min = df.loc[df.iloc[:, 3] != 0]
+    max_g = df.loc[df.iloc[:, 3] == df.iloc[:, 3].max()].iloc[:, 2]
+    min_g = df_min.loc[df_min.iloc[:, 3] == df_min.iloc[:, 3].min()].iloc[:, 2]
+    col1.metric(f"Max Grade", df.iloc[:, 3].max())
+    col2.metric("Average", round(df.iloc[:, 3].mean(), 2))
+    col3.metric("Min Grade", df_min.iloc[:, 3].min())
+
+
 # Call dataframe
 if upload_file:
     df = pd.read_csv(upload_file, encoding='latin-1')
@@ -96,3 +109,6 @@ elif options == "Plots":
     if st.checkbox("Gender"):
         st.subheader("**Students per Gender**")
         gender(df)
+
+    elif st.checkbox("Academic Performance"):
+        average(df)
