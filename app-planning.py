@@ -122,7 +122,7 @@ def students(df):
     )
     ind = np.array([1, 2, 3, 4, 5, 7])
     infor = [
-        st.write(f"{col}: {df_est.iloc[:, index].values[0]}")
+        st.write(f"**{col}:** {df_est.iloc[:, index].values[0]}")
         for index, col in zip(ind, features)
     ]
 
