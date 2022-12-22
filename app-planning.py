@@ -54,7 +54,7 @@ st.sidebar.image(Logo)
 st.sidebar.title(":arrow_down: **Navigation**")
 
 # Upload files
-upload_file = st.sidebar.file_uploader("Upload your file" )
+upload_file = st.sidebar.file_uploader("Upload your file")
 
 # Pages
 with st.sidebar:
@@ -73,33 +73,49 @@ def data(df):
 
 
 def gender(df):
-    fig = px.histogram(df, x=df.iloc[:, -1], labels={"x": "Gender"}, color=df.iloc[:, -1])
+    fig = px.histogram(
+        df, x=df.iloc[:, -1], labels={"x": "Gender"}, color=df.iloc[:, -1]
+    )
     st.plotly_chart(fig)
     st.subheader("**Summary**")
     g = [n for n in df.iloc[:, -1].value_counts()]
     g.reverse()
-    st.write(f"Currently, there are **{g[0]} male and {g[1]} female students** enrolled in petroleum engineering.")
+    st.write(
+        f"Currently, there are **{g[1]} male and {g[0]} female students** enrolled in petroleum engineering."
+    )
     st.subheader("**Statistical Summary**")
     fig_2 = px.pie(df, values=g, names=df.iloc[:, -1].unique())
     st.plotly_chart(fig_2)
+    col1, col2 = st.columns(2)
+    col1.metric("Male", g[1])
+    col2.metric("Female", g[0])
 
 
 def average(df):
-    fig = px.bar(df, x= df.iloc[:, 3], y=df.iloc[:, 2], labels={"x": "Academic Performance", "y": "student"})
+    fig = px.bar(
+        df,
+        x=df.iloc[:, 3],
+        y=df.iloc[:, 2],
+        labels={"x": "Academic Performance", "y": "student"},
+    )
     st.plotly_chart(fig)
     st.subheader("**Summary**")
     col1, col2, col3 = st.columns(3)
     df_min = df.loc[df.iloc[:, 3] != 0]
-    max_g = df.loc[df.iloc[:, 3] == df.iloc[:, 3].max()].iloc[:, 2]
-    min_g = df_min.loc[df_min.iloc[:, 3] == df_min.iloc[:, 3].min()].iloc[:, 2]
+    max_g = df.loc[df.iloc[:, 3] == df.iloc[:, 3].max()].iloc[:, 2].values[0]
+    min_g = (
+        df_min.loc[df_min.iloc[:, 3] == df_min.iloc[:, 3].min()].iloc[:, 2].values[0]
+    )
     col1.metric(f"Max Grade", df.iloc[:, 3].max())
     col2.metric("Average", round(df.iloc[:, 3].mean(), 2))
-    col3.metric("Min Grade", df_min.iloc[:, 3].min())
+    col3.metric(f"Min Grade", df_min.iloc[:, 3].min())
+    st.success(f" **Max grade**: {max_g}")
+    st.success(f" **Min grade**: {min_g}")
 
 
 # Call dataframe
 if upload_file:
-    df = pd.read_csv(upload_file, encoding='latin-1')
+    df = pd.read_csv(upload_file, encoding="latin-1")
 
 # Call options of web app
 if options == "Data":
