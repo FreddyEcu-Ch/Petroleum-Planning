@@ -104,9 +104,7 @@ def average(df):
     st.subheader("**Summary**")
     col1, col2, col3 = st.columns(3)
     max_g = df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].max()].iloc[:, 2].values[0]
-    min_g = (
-        df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].min()].iloc[:, 2].values[0]
-    )
+    min_g = df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].min()].iloc[:, 2].values[0]
     col1.metric(f"Max Grade", df_c.iloc[:, 3].max())
     col2.metric("Average", round(df_c.iloc[:, 3].mean(), 2))
     col3.metric(f"Min Grade", df_c.iloc[:, 3].min())
@@ -119,9 +117,14 @@ def students(df):
     est = st.selectbox("Select a student", options=df.iloc[:, 2])
     st.subheader("**Show Information**")
     df_est = df.loc[df.iloc[:, 2] == est]
-    features = np.array(["ID", "Name", "Grade", "% Avance", "Credits to take", "Gender"])
+    features = np.array(
+        ["ID", "Name", "Grade", "% Avance", "Credits to take", "Gender"]
+    )
     ind = np.array([1, 2, 3, 4, 5, 7])
-    infor = [st.write(f"{col}: {df_est.iloc[:, index].values[0]}") for index, col in zip(ind, features)]
+    infor = [
+        st.write(f"{col}: {df_est.iloc[:, index].values[0]}")
+        for index, col in zip(ind, features)
+    ]
 
 
 # Call dataframe
