@@ -107,7 +107,7 @@ def average(df):
         df_min.loc[df_min.iloc[:, 3] == df_min.iloc[:, 3].min()].iloc[:, 2].values[0]
     )
     col1.metric(f"Max Grade", df.iloc[:, 3].max())
-    col2.metric("Average", round(df.iloc[:, 3].mean(), 2))
+    col2.metric("Average", round(df_min.iloc[:, 3].mean(), 2))
     col3.metric(f"Min Grade", df_min.iloc[:, 3].min())
     st.success(f" **Max grade**: {max_g}")
     st.success(f" **Min grade**: {min_g}")
