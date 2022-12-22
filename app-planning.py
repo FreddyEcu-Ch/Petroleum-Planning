@@ -118,7 +118,7 @@ def students(df):
     st.subheader("**Show Information**")
     df_est = df.loc[df.iloc[:, 2] == est]
     features = np.array(
-        ["ID", "Name", "Grade", "% Avance", "Credits to take", "Gender"]
+        ["ID", "Name", "Grade", "% Career Advancement", "Credits to take", "Gender"]
     )
     ind = np.array([1, 2, 3, 4, 5, 7])
     infor = [
