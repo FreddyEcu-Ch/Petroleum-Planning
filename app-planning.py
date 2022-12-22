@@ -92,23 +92,23 @@ def gender(df):
 
 
 def average(df):
+    df_c = df.loc[df.iloc[:, 3] != 0]
     fig = px.bar(
-        df,
-        x=df.iloc[:, 3],
-        y=df.iloc[:, 2],
+        df_c,
+        x=df_c.iloc[:, 3],
+        y=df_c.iloc[:, 2],
         labels={"x": "Academic Performance", "y": "student"},
     )
     st.plotly_chart(fig)
     st.subheader("**Summary**")
     col1, col2, col3 = st.columns(3)
-    df_min = df.loc[df.iloc[:, 3] != 0]
-    max_g = df.loc[df.iloc[:, 3] == df.iloc[:, 3].max()].iloc[:, 2].values[0]
+    max_g = df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].max()].iloc[:, 2].values[0]
     min_g = (
-        df_min.loc[df_min.iloc[:, 3] == df_min.iloc[:, 3].min()].iloc[:, 2].values[0]
+        df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].min()].iloc[:, 2].values[0]
     )
-    col1.metric(f"Max Grade", df.iloc[:, 3].max())
-    col2.metric("Average", round(df_min.iloc[:, 3].mean(), 2))
-    col3.metric(f"Min Grade", df_min.iloc[:, 3].min())
+    col1.metric(f"Max Grade", df_c.iloc[:, 3].max())
+    col2.metric("Average", round(df_c.iloc[:, 3].mean(), 2))
+    col3.metric(f"Min Grade", df_c.iloc[:, 3].min())
     st.success(f" **Max grade**: {max_g}")
     st.success(f" **Min grade**: {min_g}")
 
