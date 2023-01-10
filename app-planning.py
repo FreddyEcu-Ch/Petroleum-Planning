@@ -97,14 +97,14 @@ def average(df):
     fig = px.bar(
         df_c,
         x=df_c.iloc[:, 3],
-        y=df_c.iloc[:, 2],
+        y=df_c.iloc[:, 1],
         labels={"x": "Academic Performance", "y": "student"},
     )
     st.plotly_chart(fig)
     st.subheader("**Summary**")
     col1, col2, col3 = st.columns(3)
-    max_g = df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].max()].iloc[:, 2].values[0]
-    min_g = df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].min()].iloc[:, 2].values[0]
+    max_g = df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].max()].iloc[:, 3].values[0]
+    min_g = df_c.loc[df_c.iloc[:, 3] == df_c.iloc[:, 3].min()].iloc[:, 3].values[0]
     col1.metric(f"Max Grade", df_c.iloc[:, 3].max())
     col2.metric("Average", round(df_c.iloc[:, 3].mean(), 2))
     col3.metric(f"Min Grade", df_c.iloc[:, 3].min())
@@ -114,9 +114,9 @@ def average(df):
 
 def students(df):
     st.subheader("**Students Information**")
-    est = st.selectbox("Select a student", options=df.iloc[:, 2])
+    est = st.selectbox("Select a student", options=df.iloc[:, 1])
     st.subheader("**Show Information**")
-    df_est = df.loc[df.iloc[:, 2] == est]
+    df_est = df.loc[df.iloc[:, 1] == est]
     features = np.array(
         ["ID", "Name", "Grade", "% Career Advancement", "Credits to take", "Gender"]
     )
@@ -130,6 +130,7 @@ def students(df):
 # Call dataframe
 if upload_file:
     df = pd.read_csv(upload_file, encoding="latin-1")
+    df.iloc[:, 0] = df.iloc[:, 0].astype("object")
 
 # Call options of web app
 if options == "Data":
